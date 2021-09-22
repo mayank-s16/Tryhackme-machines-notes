@@ -1,0 +1,32 @@
+22-Sep-2021, Wednesday
+Notes by: Mayank Kumar Prajapati
+Machine Name: Vulnvversity
+URL: https://tryhackme.com/room/vulnversity
+=============================================================
+Phase1: Reconnaissance
+> nmap -sV 10.10.227.240
+Scan the box, how many ports are open?: 
+6
+
+What version of the squid proxy is running on the machine?: 
+3.5.12
+
+How many ports will nmap scan if the flag -p-400 was used?
+400
+
+Using the nmap flag -n what will it not resolve?
+DNS
+
+What is the most likely operating system this machine is running?
+Ubuntu
+
+What port is the web server running on?
+3333
+=============================================================
+
+Phase2:  Locating directories using GoBuster
+> apt install gobuster
+
+What is the directory that has an upload form page?
+/internal/
+=============================================================
