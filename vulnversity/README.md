@@ -6,6 +6,7 @@ URL: https://tryhackme.com/room/vulnversity
 
 Phase1: Reconnaissance
 > nmap -sV 10.10.227.240
+
 Scan the box, how many ports are open. 
 6
 
