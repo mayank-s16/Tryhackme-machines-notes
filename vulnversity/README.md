@@ -1,8 +1,11 @@
-  _22-Sep-2021, Wednesday\
-  Notes by: Mayank Kumar Prajapati\
-  Machine Name: Vulnversity\
-  URL: https://tryhackme.com/room/vulnversity_
+ <div align = "center"> _22-Sep-2021, Wednesday
 
+  Notes by: Mayank Kumar Prajapati
+
+  Machine Name: Vulnversity
+  
+  URL: https://tryhackme.com/room/vulnversity_
+</div>
 
 **Phase1: Reconnaissance**
 ***
