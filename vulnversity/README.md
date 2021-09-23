@@ -32,10 +32,11 @@ What port is the web server running on?\
 `gobuster dir -u http://10.10.227.240:3333/ -w /usr/share/wordlists/dirbusterdirectory-list-2.3-medium.txt\`\
 `gobuster dir -u http://10.10.227.240:3333/internal -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt`
 
-What is the directory that has an upload form page?
+What is the directory that has an upload form page?\
 /internal/
 
- Phase3: Compromise the webserver
+ **Phase 3: Compromise the webserver**
+ ***
 
 Try upload a few file types to the server, what common extension seems to be blocked?
 .php
@@ -49,7 +50,7 @@ FInd it inside bill's home directory.
 
 
 
-**Phase 3: Privilege Escalation**
+**Phase 4: Privilege Escalation**
 ***
 In Linux, SUID (set owner userId upon execution) is a special type of file permission given to a file. 
 SUID gives temporary permissions to a user to run the program/file with the permission of the file owner (rather than the user who runs it).
