@@ -3,7 +3,9 @@
   Machine Name: Vulnversity<br>
   URL: https://tryhackme.com/room/vulnversity
 </div>
+<br><br>
 
+***
 **Phase 1: Reconnaissance**
 ***
 `nmap -sV 10.10.227.240`
@@ -26,30 +28,32 @@ Ubuntu
 What port is the web server running on?\
 3333
 
+***
  **Phase 2:  Locating directories using GoBuster**
  ***
 `apt install gobuster`\
-`gobuster dir -u http://10.10.227.240:3333/ -w /usr/share/wordlists/dirbusterdirectory-list-2.3-medium.txt\`\
+`gobuster dir -u http://10.10.227.240:3333/ -w /usr/share/wordlists/dirbusterdirectory-list-2.3-medium.txt`\
 `gobuster dir -u http://10.10.227.240:3333/internal -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt`
 
 What is the directory that has an upload form page?\
 /internal/
 
- **Phase 3: Compromise the webserver**
- ***
+***
+**Phase 3: Compromise the webserver**
+***
 
-Try upload a few file types to the server, what common extension seems to be blocked?
+Try upload a few file types to the server, what common extension seems to be blocked?\
 .php
 
 
-What is the name of the user who manages the webserver?
+What is the name of the user who manages the webserver?\
 bill
 
-What is the user flag?
-FInd it inside bill's home directory.
+What is the user flag?\
+Find it inside bill's home directory.
 
 
-
+***
 **Phase 4: Privilege Escalation**
 ***
 In Linux, SUID (set owner userId upon execution) is a special type of file permission given to a file. 
