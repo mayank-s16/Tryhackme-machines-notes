@@ -1,10 +1,10 @@
- ### 22-Sep-2021, Wednesday
- ### Notes by: Mayank Kumar Prajapati
- ### Machine Name: Vulnversity
- ### URL: https://tryhackme.com/room/vulnversity
+  **_22-Sep-2021, Wednesday\
+  Notes by: Mayank Kumar Prajapati\
+  Machine Name: Vulnversity\
+  URL: https://tryhackme.com/room/vulnversity_**
 ***
 
- ## **Phase1: Reconnaissance**
+  **Phase1: Reconnaissance**
 > nmap -sV 10.10.227.240`
 
  **Scan the box, how many ports are open.**\
