@@ -34,7 +34,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 *******
 ```
 Website shows that LFI could be there.<br>
-Found one page on website while normally we can browsing it. Injected directory traversal was able to see the user in /etc/passwd file with plain text username and password.
+Found one page on website while normally browsing it. Injected directory traversal in `name` parameter, was able to see the user in /etc/passwd file with plain text username and password.
 
 2. Root flag
 ```
